@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "description": "Lista de tarefas para ser fazer",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --watch ."
   },
   "author": "Rubens-Lira",
   "license": "ISC",
   "dependencies": {
-    "espress": "^0.0.0",
     "express": "^4.21.2",
     "pg": "^8.13.3",
     "pg-hstore": "^2.3.4",
