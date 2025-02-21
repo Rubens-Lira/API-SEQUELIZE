@@ -15,7 +15,7 @@ router.post("/tasks", async (req, res, next) => {
 
 router.get("/tasks", async (req, res, next) => {
   try {
-    const tasks = await Task.findAll()
+    const tasks = await Task.findAll({ order: [["priority", "ASC"]] })
     res.json(tasks) // Retorna a lista de tarefas
   } catch (error) {
     next(error) // Passa o erro para o middleware de erro
