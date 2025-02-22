@@ -7,11 +7,19 @@ app.use(express.json());
 
 app.use("/api", router);
 
-// Middleware para tratar erros de forma centralizada
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(err.status || 500).json({ error: err.message });
+
+  if (res.headersSent) {
+    return next(err); // Se os headers já foram enviados, passa o erro para o próximo middleware
+  }
+
+  res.status(err.status || 500).json({
+    message: err.message || "Erro interno no servidor",
+    error: process.env.NODE_ENV === "development" ? err.stack : undefined, // Mostra o stack trace apenas no ambiente de desenvolvimento
+  });
 });
+
 
 (async () => {
   try {
